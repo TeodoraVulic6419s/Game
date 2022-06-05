@@ -26,6 +26,7 @@ public class MainMenu : MonoBehaviour
         btnExit.onClick.AddListener(() =>
         {
             SceneManager.LoadScene("StartScreen");
+
         });
     }
 

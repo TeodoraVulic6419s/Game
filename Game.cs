@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class Game : MonoBehaviour
 {
+    public Button btnExit;
     public GameObject chesspiece;
 
     private GameObject[,] positions = new GameObject[7, 7];
@@ -28,7 +29,12 @@ public class Game : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if(DBManager.LoggedIn)
+        btnExit.onClick.AddListener(() =>
+        {
+            SceneManager.LoadScene("MainMenu");
+
+        });
+        if (DBManager.LoggedIn)
         {
             playerDisplay.text = "Player : " + DBManager.username;
         }

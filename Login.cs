@@ -9,7 +9,14 @@ public class Login : MonoBehaviour
     public InputField InUser;
     public InputField InPass;
     public Button btnLogin;
-    
+    public Button btnBack;
+    public void Start()
+    {
+        btnBack.onClick.AddListener(() =>
+        {
+            SceneManager.LoadScene("StartScreen");
+        });
+    }
     public void CallLogin()
     {
         StartCoroutine(Loginn());

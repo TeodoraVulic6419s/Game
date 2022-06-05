@@ -5,6 +5,7 @@ using UnityEngine.Networking;
 using System;
 using System.Text;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 
 
@@ -12,10 +13,17 @@ public class SeeScores : MonoBehaviour
 {
     [SerializeField]
     public Text tbScores;
+    public Button btnExit;
     // Start is called before the first frame update
     void Start()
     {
         StartCoroutine(ShowScores());
+
+        btnExit.onClick.AddListener(() =>
+        {
+            SceneManager.LoadScene("MainMenu");
+
+        });
     }
     public IEnumerator ShowScores()
     {
@@ -29,32 +37,35 @@ public class SeeScores : MonoBehaviour
             rec1 = rec1.Replace("\"", "");
             var rec = rec1.Split(" ");
 
-            Debug.LogFormat("rec = {0}", rec[0]);
-            Debug.LogFormat("rec = {0}", rec[1]);
-            Debug.LogFormat("rec = {0}", rec[2]);
-            Debug.LogFormat("rec = {0}", rec[3]);
-            Debug.LogFormat("rec = {0}", rec[8]);
-            Debug.Log(www.downloadHandler.text);
+          
 
             byte[] results = www.downloadHandler.data;
 
             int counter = 0;
             var sb = new StringBuilder();
-          for(int i =0;i<rec.Length;i++ )
-            {
-                if(counter<3)
+            int rez = 1;
+           
+
+
+                for (int i = 0; i < rec.Length; i++)
                 {
-                    sb.Append(rec[i]).Append(" ");
-                    counter++;
-                }
-                else
-                {
-                    sb.Append("\n");
-                    sb.Append(rec[i]).Append(" ");
-                    counter = 1;
+                    if (counter < 3)
+                    {
+                        sb.Append(rec[i]).Append("   ");
+                        counter++;
+                        
+                    }
+                    else
+                    {
+                        sb.Append("\n");
+                        sb.Append(rec[i]).Append("   ");
+                        counter = 1;
+                        
+                    }
+
                 }
                 
-            }
+            
             tbScores.text = sb.ToString();
 
 
